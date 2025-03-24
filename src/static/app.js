@@ -84,11 +84,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const darkModeToggle = document.getElementById("dark-mode-toggle");
 
+  // Check for saved dark mode preference
+  if (localStorage.getItem("darkMode") === "enabled") {
+    document.body.classList.add("dark-mode");
+    document.querySelectorAll("header, section").forEach((element) => {
+      element.classList.add("dark-mode");
+    });
+  }
+
   darkModeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     document.querySelectorAll("header, section").forEach((element) => {
       element.classList.toggle("dark-mode");
     });
+
+    // Save dark mode preference
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("darkMode", "enabled");
+    } else {
+      localStorage.removeItem("darkMode");
+    }
   });
 
   // Initialize app
